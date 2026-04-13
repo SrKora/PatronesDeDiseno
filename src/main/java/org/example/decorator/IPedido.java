@@ -6,4 +6,6 @@ public interface IPedido {
     float getImporte_total();
     String getHistorial();
     void setHistorial(String historial);
+    void confirmarPedido();
+    boolean getConfirmar();
 }
