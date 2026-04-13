@@ -2,11 +2,12 @@ package org.example.decorator;
 
 public class PedidoRecargoDecorator extends Pedido{
 
-    protected Pedido pedidoEnvuelto;
+    protected IPedido pedidoEnvuelto;
 
-    public PedidoRecargoDecorator(Pedido pedidoEnvuelto) {
+    public PedidoRecargoDecorator(IPedido pedidoEnvuelto, float recargo) {
         super(pedidoEnvuelto.getId(), pedidoEnvuelto.getImporte_base());
         this.pedidoEnvuelto = pedidoEnvuelto;
+        anadirRecargo(recargo);
     }
 
     @Override

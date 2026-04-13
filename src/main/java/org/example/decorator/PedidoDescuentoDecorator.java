@@ -1,12 +1,13 @@
 package org.example.decorator;
 
-public abstract class PedidoDescuentoDecorator extends Pedido {
+public class PedidoDescuentoDecorator extends Pedido {
 
-    protected Pedido pedidoEnvuelto;
+    protected IPedido pedidoEnvuelto;
 
-    public PedidoDescuentoDecorator(Pedido pedidoEnvuelto) {
+    public PedidoDescuentoDecorator(IPedido pedidoEnvuelto, float descuento) {
         super(pedidoEnvuelto.getId(), pedidoEnvuelto.getImporte_base());
         this.pedidoEnvuelto = pedidoEnvuelto;
+        aplicarDescuento(descuento);
     }
 
     @Override

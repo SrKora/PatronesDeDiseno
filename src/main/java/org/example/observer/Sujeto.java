@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Sujeto implements ISujeto{
 
+
     List<Observer> subscribers;
 
     public Sujeto() {

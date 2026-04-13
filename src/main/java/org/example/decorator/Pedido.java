@@ -1,5 +1,8 @@
 package org.example.decorator;
-public abstract class Pedido implements IPedido {
+
+import org.example.observer.IObserver;
+
+public class Pedido implements IPedido, IObserver {
     int id;
     float importe_base, importe_total;
     String historial;
@@ -9,7 +12,7 @@ public abstract class Pedido implements IPedido {
         this.id = id;
         this.importe_base = importe_base;
         this.importe_total = importe_base;
-        this.historial = "Pedido creado\n El importe base es de " + importe_base;
+        this.historial = "Pedido creado " + id + "\n El importe base es de " + importe_base;
     }
 
     public int getId() {
@@ -35,5 +38,10 @@ public abstract class Pedido implements IPedido {
     @Override
     public String toString() {
         return historial;
+    }
+
+    @Override
+    public void update(Pedido p) {
+        System.out.println("Revisa la bandeja de entrada de tú correo...");
     }
 }

@@ -11,7 +11,7 @@ public class Observer implements IObserver{
 
     @Override
     public void update(Pedido p) {
-        System.out.println(name + " has recibido un correo nuevo con un pedido");
+        System.out.println(name + " has recibido un nuevo correo con un pedido");
 
     }
 }
