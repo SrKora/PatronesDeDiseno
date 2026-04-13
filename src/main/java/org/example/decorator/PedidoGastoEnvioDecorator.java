@@ -1,10 +1,10 @@
 package org.example.decorator;
 
-public abstract class PedidoDescuentoDecorator extends Pedido {
+public class PedidoGastoEnvioDecorator extends Pedido {
 
     protected Pedido pedidoEnvuelto;
 
-    public PedidoDescuentoDecorator(Pedido pedidoEnvuelto) {
+    public PedidoGastoEnvioDecorator(Pedido pedidoEnvuelto) {
         super(pedidoEnvuelto.getId(), pedidoEnvuelto.getImporte_base());
         this.pedidoEnvuelto = pedidoEnvuelto;
     }
@@ -39,9 +39,9 @@ public abstract class PedidoDescuentoDecorator extends Pedido {
         return pedidoEnvuelto.getHistorial();
     }
 
-    public void aplicarDescuento(float descuento) {
-        importe_total = importe_base /  ((descuento/100) + 1);
+    public void anadirGastoEnvio(float gasto) {
+        importe_total += gasto;
 
-        historial += "\nSe ha aplicado un descuento del " + descuento + " - Importe Total: " + importe_total;
+        historial += "\nSe ha aplicado un gasto de " + gasto + " - Importe Total: " + importe_total;
     }
 }
