@@ -3,46 +3,36 @@ package org.example.decorator;
 public class PedidoRecargoDecorator extends Pedido{
 
     protected IPedido pedidoEnvuelto;
+    float recargo;
 
     public PedidoRecargoDecorator(IPedido pedidoEnvuelto, float recargo) {
-        super(pedidoEnvuelto.getId(), pedidoEnvuelto.getImporte_base());
+        super(pedidoEnvuelto.getId(), pedidoEnvuelto.getImporte());
         this.pedidoEnvuelto = pedidoEnvuelto;
-        anadirRecargo(recargo);
+        this.recargo = recargo;
     }
 
     @Override
     public int getId() {
-        return super.getId();
+        return pedidoEnvuelto.getId();
     }
 
     @Override
-    public float getImporte_base() {
-        return super.getImporte_base();
+    public float getImporte() {
+        return pedidoEnvuelto.getImporte() + recargo;
     }
 
     @Override
     public void setHistorial(String historial) {
-        super.setHistorial(historial);
+        pedidoEnvuelto.setHistorial(historial);
     }
 
     @Override
     public String toString() {
-        return super.toString();
-    }
-
-    @Override
-    public float getImporte_total() {
-        return pedidoEnvuelto.getImporte_total();
+        return pedidoEnvuelto.toString() + "\nSe ha aplicado un recargo de " + recargo + " - Importe Total: " + getImporte();
     }
 
     @Override
     public String getHistorial() {
         return pedidoEnvuelto.getHistorial();
-    }
-
-    public void anadirRecargo(float recargo) {
-        importe_total += recargo;
-
-        historial += "\nSe ha aplicado un recargo de " + recargo + " - Importe Total: " + importe_total;
     }
 }

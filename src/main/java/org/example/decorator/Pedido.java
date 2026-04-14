@@ -1,23 +1,17 @@
 package org.example.decorator;
 
-import org.example.observer.ISujeto;
-import org.example.observer.Observer;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pedido implements IPedido, ISujeto {
+public abstract class Pedido implements IPedido {
     int id;
-    float importe_base, importe_total;
+    float importe;
     String historial;
     boolean confirmado;
-    List<Observer> subscribers = new ArrayList<>();
 
-    public Pedido(int id, float importe_base) {
+    public Pedido(int id, float importe) {
         this.id = id;
-        this.importe_base = importe_base;
-        this.importe_total = importe_base;
-        this.historial = "Pedido creado - Id: " + id + "\n El importe base es de " + importe_base;
+        this.importe = importe;
         this.confirmado = false;
     }
 
@@ -25,12 +19,8 @@ public class Pedido implements IPedido, ISujeto {
         return id;
     }
 
-    public float getImporte_base() {
-        return importe_base;
-    }
-
-    public float getImporte_total() {
-        return importe_total;
+    public float getImporte() {
+        return importe;
     }
 
     public String getHistorial() {
@@ -54,22 +44,5 @@ public class Pedido implements IPedido, ISujeto {
     @Override
     public String toString() {
         return historial;
-    }
-
-    @Override
-    public void subscribe(Observer o) {
-        subscribers.add(o);
-    }
-
-    @Override
-    public void desubscribe(Observer o) {
-        subscribers.remove(o);
-    }
-
-    @Override
-    public void notify(Pedido p) {
-        for (Observer o : subscribers) {
-            o.update(p);
-        }
     }
 }

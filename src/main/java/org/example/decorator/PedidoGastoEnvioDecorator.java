@@ -3,36 +3,32 @@ package org.example.decorator;
 public class PedidoGastoEnvioDecorator extends Pedido {
 
     protected IPedido pedidoEnvuelto;
+    float gasto;
 
     public PedidoGastoEnvioDecorator(IPedido pedidoEnvuelto, float gastoEnvio) {
-        super(pedidoEnvuelto.getId(), pedidoEnvuelto.getImporte_base());
+        super(pedidoEnvuelto.getId(), pedidoEnvuelto.getImporte());
         this.pedidoEnvuelto = pedidoEnvuelto;
-        anadirGastoEnvio(gastoEnvio);
+        this.gasto = gasto;
     }
 
     @Override
     public int getId() {
-        return super.getId();
+        return pedidoEnvuelto.getId();
     }
 
     @Override
-    public float getImporte_base() {
-        return super.getImporte_base();
+    public float getImporte() {
+        return pedidoEnvuelto.getImporte() + gasto;
     }
 
     @Override
     public void setHistorial(String historial) {
-        super.setHistorial(historial);
+        pedidoEnvuelto.setHistorial(historial);
     }
 
     @Override
     public String toString() {
-        return super.toString();
-    }
-
-    @Override
-    public float getImporte_total() {
-        return pedidoEnvuelto.getImporte_total();
+        return pedidoEnvuelto.toString() + "\nSe ha aplicado un gasto de " + gasto + " - Importe Total: " + getImporte();
     }
 
     @Override
@@ -40,9 +36,4 @@ public class PedidoGastoEnvioDecorator extends Pedido {
         return pedidoEnvuelto.getHistorial();
     }
 
-    public void anadirGastoEnvio(float gasto) {
-        importe_total += gasto;
-
-        historial += "\nSe ha aplicado un gasto de " + gasto + " - Importe Total: " + importe_total;
-    }
 }

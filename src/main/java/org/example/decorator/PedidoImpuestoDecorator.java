@@ -3,46 +3,36 @@ package org.example.decorator;
 public class PedidoImpuestoDecorator extends Pedido{
 
     protected IPedido pedidoEnvuelto;
+    float impuesto;
 
     public PedidoImpuestoDecorator(IPedido pedidoEnvuelto, float impuesto) {
-        super(pedidoEnvuelto.getId(), pedidoEnvuelto.getImporte_base());
+        super(pedidoEnvuelto.getId(), pedidoEnvuelto.getImporte());
         this.pedidoEnvuelto = pedidoEnvuelto;
-        anadirImpuesto(impuesto);
+        this.impuesto = impuesto;
     }
 
     @Override
     public int getId() {
-        return super.getId();
-    }
-
-    @Override
-    public float getImporte_base() {
-        return super.getImporte_base();
+        return pedidoEnvuelto.getId();
     }
 
     @Override
     public void setHistorial(String historial) {
-        super.setHistorial(historial);
+        pedidoEnvuelto.setHistorial(historial);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return pedidoEnvuelto.toString() + "\nSe ha aplicado un impuesto del " + impuesto + " - Importe Total: " + getImporte();
     }
 
     @Override
-    public float getImporte_total() {
-        return pedidoEnvuelto.getImporte_total();
+    public float getImporte() {
+        return pedidoEnvuelto.getImporte() * ((impuesto/100)+1);
     }
 
     @Override
     public String getHistorial() {
         return pedidoEnvuelto.getHistorial();
-    }
-
-    public void anadirImpuesto(float impuesto) {
-        importe_total = importe_base * ((impuesto/100) + 1);
-
-        historial += "\nSe ha aplicado un impuesto del " + impuesto + " - Importe Total: " + importe_total;
     }
 }

@@ -2,8 +2,7 @@ package org.example.decorator;
 
 public interface IPedido {
     int getId();
-    float getImporte_base();
-    float getImporte_total();
+    float getImporte();
     String getHistorial();
     void setHistorial(String historial);
     void confirmarPedido();

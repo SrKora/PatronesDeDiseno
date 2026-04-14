@@ -13,10 +13,10 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         boolean salir = true;
-        int id, porcentaje;
+        int porcentaje, index;
 
         ArrayList<IPedido> pedidos = new ArrayList<>();
-        IPedido pedidoActual = new Pedido(0, 0);
+        IPedido pedidoActual = new PedidoBase(0, 0);
 
         System.out.println("Bienvenido al sistema que hace cosas");
 
@@ -33,36 +33,48 @@ public class Main {
                     switch (mostrarOpcionesPedidoIndividual(sc)){
                         case 1:
                             System.out.println(pedidoActual);
-                            continue;
+                            break;
                         case 2:
                             pedidoActual.confirmarPedido();
-                            continue;
+                            break;
                         case 3:
                             pedidos.remove(pedidoActual);
-                            continue;
+                            break;
                         case 4:
                             System.out.println("Introduce el descuento que quiere asignar al pedido:");
                             porcentaje = sc.nextInt();
+                            index = pedidos.indexOf(pedidoActual);
+                            pedidos.remove(index);
                             pedidoActual = new PedidoDescuentoDecorator(pedidoActual, porcentaje);
-                            continue;
+                            pedidos.add(index, pedidoActual);
+                            break;
                         case 5:
                             System.out.println("Introduzca el impuesto que quiere asignarle al pedido:");
                             porcentaje = sc.nextInt();
+                            index = pedidos.indexOf(pedidoActual);
+                            pedidos.remove(index);
                             pedidoActual = new PedidoImpuestoDecorator(pedidoActual, porcentaje);
-                            continue;
+                            pedidos.add(index, pedidoActual);
+                            break;
                         case 6:
                             System.out.println("Introduzca los gastos de envío al pedido:");
                             porcentaje = sc.nextInt();
+                            index = pedidos.indexOf(pedidoActual);
+                            pedidos.remove(index);
                             pedidoActual = new PedidoGastoEnvioDecorator(pedidoActual, porcentaje);
-                            continue;
+                            pedidos.add(index, pedidoActual);
+                            break;
                         case 7:
                             System.out.println("Introduzca el recargo que quiere añadirle al pedido:");
                             porcentaje = sc.nextInt();
+                            index = pedidos.indexOf(pedidoActual);
+                            pedidos.remove(index);
                             pedidoActual = new PedidoRecargoDecorator(pedidoActual, porcentaje);
-                            continue;
+                            pedidos.add(index, pedidoActual);
+                            break;
                         default:
                             salir = false;
-                            break;
+                        break;
                     }
                     break;
                 case 4:
@@ -120,7 +132,7 @@ public class Main {
 
     private static void mostrarListaPedidos(ArrayList<IPedido> pedidos) {
         for (IPedido p : pedidos) {
-            System.out.println("Id: " + p.getId() + " - Precio: " + p.getImporte_total());
+            System.out.println("Id: " + p.getId() + " - Precio: " + p.getImporte());
         }
     }
 
@@ -134,7 +146,7 @@ public class Main {
         } else {
             id = pedidos.getLast().getId();
         }
-        pedidoActual = new Pedido(id, precio);
+        pedidoActual = new PedidoBase(id, precio);
         pedidos.add(pedidoActual);
     }
 

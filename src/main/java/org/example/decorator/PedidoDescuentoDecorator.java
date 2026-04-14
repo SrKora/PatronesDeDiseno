@@ -3,46 +3,36 @@ package org.example.decorator;
 public class PedidoDescuentoDecorator extends Pedido {
 
     protected IPedido pedidoEnvuelto;
+    float descuento;
 
     public PedidoDescuentoDecorator(IPedido pedidoEnvuelto, float descuento) {
-        super(pedidoEnvuelto.getId(), pedidoEnvuelto.getImporte_base());
+        super(pedidoEnvuelto.getId(), pedidoEnvuelto.getImporte());
         this.pedidoEnvuelto = pedidoEnvuelto;
-        aplicarDescuento(descuento);
+        this.descuento = descuento;
     }
 
     @Override
     public int getId() {
-        return super.getId();
-    }
-
-    @Override
-    public float getImporte_base() {
-        return super.getImporte_base();
+        return pedidoEnvuelto.getId();
     }
 
     @Override
     public void setHistorial(String historial) {
-        super.setHistorial(historial);
+        pedidoEnvuelto.setHistorial(historial);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return pedidoEnvuelto.toString() + "\nSe ha aplicado un descuento del " + descuento + " - Importe Total: " + getImporte();
     }
 
     @Override
-    public float getImporte_total() {
-        return pedidoEnvuelto.getImporte_total();
+    public float getImporte() {
+        return pedidoEnvuelto.getImporte() / ((descuento/100)+1);
     }
 
     @Override
     public String getHistorial() {
         return pedidoEnvuelto.getHistorial();
-    }
-
-    public void aplicarDescuento(float descuento) {
-        importe_total = importe_base /  ((descuento/100) + 1);
-
-        historial += "\nSe ha aplicado un descuento del " + descuento + " - Importe Total: " + importe_total;
     }
 }
