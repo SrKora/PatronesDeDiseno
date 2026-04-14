@@ -1,9 +1,9 @@
 package org.example;
 
 import org.example.decorator.*;
+import org.example.observer.Cliente;
 
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.Scanner;
 
 public class Main {
@@ -14,6 +14,13 @@ public class Main {
 
         boolean salir = true;
         int porcentaje, index;
+
+        Cliente[] clientes = new Cliente[] {
+                new Cliente("Alex"),
+                new Cliente("Maria"),
+                new Cliente("Gio"),
+                new Cliente("Max")
+        };
 
         ArrayList<IPedido> pedidos = new ArrayList<>();
         IPedido pedidoActual = new PedidoBase(0, 0);
