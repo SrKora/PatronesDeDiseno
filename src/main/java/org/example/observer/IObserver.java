@@ -1,7 +1,8 @@
 package org.example.observer;
 
-import org.example.decorator.Pedido;
+import org.example.decorator.IPedido;
 
 public interface IObserver {
-    void update(Pedido p);
+    void actualizar(IPedido p);
+    String getNombre();
 }

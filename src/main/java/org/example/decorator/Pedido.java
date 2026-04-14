@@ -1,12 +1,11 @@
 package org.example.decorator;
 
 import org.example.observer.IObserver;
-import org.example.observer.ISujeto;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
-public abstract class Pedido implements IPedido, ISujeto {
+public abstract class Pedido implements IPedido {
     int id;
     float importe;
     String historial;
@@ -43,21 +42,34 @@ public abstract class Pedido implements IPedido, ISujeto {
     @Override
     public void confirmarPedido() {
         this.confirmado = true;
+        notificar(this);
+    }
+
+    public String nombreSuscriptores() {
+        return Arrays.toString(suscriptores.toArray());
     }
 
     @Override
     public String toString() {
-        return historial;
+        return nombreSuscriptores() + "\n" + historial;
     }
 
     @Override
     public void suscribir(IObserver o) {
-        suscriptores.add(o);
+        if (!suscriptores.contains(o)){
+            suscriptores.add(o);
+        } else {
+            System.out.println("Este cliente ya ha sido añadido");
+        }
     }
 
     @Override
     public void desuscribir(IObserver o) {
-        suscriptores.remove(o);
+        if (suscriptores.toArray().length != 1){
+            suscriptores.remove(o);
+        } else {
+            System.out.println("No puedes dejar un pedido sin clientes");
+        }
     }
 
     @Override
