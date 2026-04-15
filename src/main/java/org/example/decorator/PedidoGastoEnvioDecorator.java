@@ -8,7 +8,7 @@ public class PedidoGastoEnvioDecorator extends Pedido {
     public PedidoGastoEnvioDecorator(IPedido pedidoEnvuelto, float gastoEnvio) {
         super(pedidoEnvuelto.getId(), pedidoEnvuelto.getImporte());
         this.pedidoEnvuelto = pedidoEnvuelto;
-        this.gasto = gasto;
+        this.gasto = gastoEnvio;
     }
 
     @Override
@@ -29,6 +29,16 @@ public class PedidoGastoEnvioDecorator extends Pedido {
     @Override
     public String toString() {
         return pedidoEnvuelto.toString() + "\nSe ha aplicado un gasto de " + gasto + " - Importe Total: " + getImporte();
+    }
+
+    @Override
+    public boolean getConfirmar() {
+        return pedidoEnvuelto.getConfirmar();
+    }
+
+    @Override
+    public void confirmarPedido() {
+        pedidoEnvuelto.confirmarPedido();
     }
 
     @Override

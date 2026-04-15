@@ -14,7 +14,7 @@ public class Service {
     }
 
     public void crearPedido() {
-        IPedido pedidoActual;
+        Pedido pedidoActual;
         int precio, id;
         precio = UI.leerEntero("Introduzca el precio base del pedido");
         if (repo.pedidos.isEmpty()){
@@ -27,7 +27,7 @@ public class Service {
         anadirPedido(pedidoActual);
     }
 
-    public ArrayList<IPedido> listaDePedidos() {
+    public ArrayList<Pedido> listaDePedidos() {
         return repo.pedidos;
     }
 
@@ -36,10 +36,10 @@ public class Service {
         return c[i];
     }
 
-    public IPedido getPedidoPorID(String mensaje) {
+    public Pedido getPedidoPorID(String mensaje) {
         int id;
         id = UI.leerEntero(mensaje);
-        for (IPedido p : repo.pedidos) {
+        for (Pedido p : repo.pedidos) {
             if (p.getId() == id) {
                 return p;
             } else {
@@ -49,7 +49,7 @@ public class Service {
         return null;
     }
 
-    public IPedido asignarRecargo(IPedido pedidoActual) {
+    public Pedido asignarRecargo(Pedido pedidoActual) {
         int index;
         int porcentaje;
         porcentaje = UI.leerEntero("Introduzca el recargo que quiere añadirle al pedido:");
@@ -60,7 +60,7 @@ public class Service {
         return pedidoActual;
     }
 
-    public IPedido asignarGatoEnvio(IPedido pedidoActual) {
+    public Pedido asignarGatoEnvio(Pedido pedidoActual) {
         int porcentaje;
         int index;
         porcentaje = UI.leerEntero("Introduzca los gastos de envío al pedido:");
@@ -71,7 +71,7 @@ public class Service {
         return pedidoActual;
     }
 
-    public IPedido asignarImpuesto(IPedido pedidoActual) {
+    public Pedido asignarImpuesto(Pedido pedidoActual) {
         int index;
         int porcentaje;
         porcentaje = UI.leerEntero("Introduzca el impuesto que quiere asignarle al pedido:");
@@ -82,7 +82,7 @@ public class Service {
         return pedidoActual;
     }
 
-    public IPedido asignarDescuento(IPedido pedidoActual) {
+    public Pedido asignarDescuento(Pedido pedidoActual) {
         int porcentaje;
         int index;
         porcentaje = UI.leerEntero("Introduce el descuento que quiere asignar al pedido:");
@@ -93,7 +93,7 @@ public class Service {
         return pedidoActual;
     }
 
-    public void confirmarPedido(IPedido pedidoActual) {
+    public void confirmarPedido(Pedido pedidoActual) {
         if (!pedidoActual.getConfirmar()) {
             pedidoActual.confirmarPedido();
         } else {
@@ -101,30 +101,29 @@ public class Service {
         }
     }
 
-    public void suscribirCliente(IPedido pedidoActual) {
-        Arrays.stream(repo.clientes).forEach(System.out::println);
+    public void suscribirCliente(Pedido pedidoActual) {
         System.out.println(Arrays.toString(repo.clientes));
         String nombre = UI.leerTexto("Indique el nombre del cliente que quiere añadir");
         IObserver io = Arrays.stream(repo.clientes).filter(c -> c.getNombre().equalsIgnoreCase(nombre)).findFirst().orElse(null);
         pedidoActual.suscribir(io);
     }
 
-    public void desuscribirCliente(IPedido pedidoActual) {
-        Arrays.stream(repo.clientes).forEach(System.out::println);
+    public void desuscribirCliente(Pedido pedidoActual) {
+        System.out.println(pedidoActual.nombreSuscriptores());
         String nombre = UI.leerTexto("Indique el nombre del cliente que quiere eliminar");
         IObserver io = Arrays.stream(repo.clientes).filter(c -> c.getNombre().equalsIgnoreCase(nombre)).findFirst().orElse(null);
         pedidoActual.desuscribir(io);
     }
 
-    public void eliminarPedido(IPedido p) {
+    public void eliminarPedido(Pedido p) {
         repo.pedidos.remove(p);
     }
 
-    public void anadirPedido(IPedido p) {
+    public void anadirPedido(Pedido p) {
         repo.pedidos.add(p);
     }
 
-    public void anadirPorIndice(int index, IPedido p) {
+    public void anadirPorIndice(int index, Pedido p) {
         repo.pedidos.add(index, p);
     }
 }

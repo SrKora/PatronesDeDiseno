@@ -19,6 +19,16 @@ public class PedidoBase extends Pedido{
     }
 
     @Override
+    public boolean getConfirmar() {
+        return super.getConfirmar();
+    }
+
+    @Override
+    public void confirmarPedido() {
+        super.confirmarPedido();
+    }
+
+    @Override
     public String toString() {
         return super.toString();
     }

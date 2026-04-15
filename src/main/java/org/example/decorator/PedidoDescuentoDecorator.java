@@ -27,6 +27,16 @@ public class PedidoDescuentoDecorator extends Pedido {
     }
 
     @Override
+    public boolean getConfirmar() {
+        return pedidoEnvuelto.getConfirmar();
+    }
+
+    @Override
+    public void confirmarPedido() {
+        pedidoEnvuelto.confirmarPedido();
+    }
+
+    @Override
     public float getImporte() {
         return pedidoEnvuelto.getImporte() / ((descuento/100)+1);
     }

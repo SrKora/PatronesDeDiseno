@@ -1,11 +1,12 @@
 package org.example.decorator;
 
 import org.example.observer.IObserver;
+import org.example.observer.IPedidoObservable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public abstract class Pedido implements IPedido {
+public abstract class Pedido implements IPedido, IPedidoObservable {
     int id;
     float importe;
     String historial;
@@ -15,7 +16,6 @@ public abstract class Pedido implements IPedido {
     public Pedido(int id, float importe) {
         this.id = id;
         this.importe = importe;
-        this.confirmado = false;
     }
 
     public int getId() {
@@ -35,6 +35,11 @@ public abstract class Pedido implements IPedido {
     }
 
     @Override
+    public ArrayList<IObserver> getSuscriptores() {
+        return suscriptores;
+    }
+
+    @Override
     public boolean getConfirmar() {
         return confirmado;
     }
@@ -42,9 +47,11 @@ public abstract class Pedido implements IPedido {
     @Override
     public void confirmarPedido() {
         this.confirmado = true;
+
         notificar(this);
     }
 
+    @Override
     public String nombreSuscriptores() {
         return Arrays.toString(suscriptores.toArray());
     }
@@ -65,7 +72,7 @@ public abstract class Pedido implements IPedido {
 
     @Override
     public void desuscribir(IObserver o) {
-        if (suscriptores.toArray().length <= 1){
+        if (suscriptores.size() > 1){
             suscriptores.remove(o);
         } else {
             System.out.println("No puedes dejar un pedido sin clientes");

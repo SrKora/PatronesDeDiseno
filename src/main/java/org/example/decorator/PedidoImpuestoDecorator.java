@@ -27,6 +27,16 @@ public class PedidoImpuestoDecorator extends Pedido{
     }
 
     @Override
+    public boolean getConfirmar() {
+        return pedidoEnvuelto.getConfirmar();
+    }
+
+    @Override
+    public void confirmarPedido() {
+        pedidoEnvuelto.confirmarPedido();
+    }
+
+    @Override
     public float getImporte() {
         return pedidoEnvuelto.getImporte() * ((impuesto/100)+1);
     }

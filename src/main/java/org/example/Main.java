@@ -10,7 +10,7 @@ public class Main {
         Service service = new Service();
         UI ui = new UI(service);
 
-        IPedido pedidoActual;
+        Pedido pedidoActual;
 
         boolean salir = true;
 

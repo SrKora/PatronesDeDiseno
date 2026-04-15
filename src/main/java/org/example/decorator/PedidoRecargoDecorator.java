@@ -32,6 +32,16 @@ public class PedidoRecargoDecorator extends Pedido{
     }
 
     @Override
+    public boolean getConfirmar() {
+        return pedidoEnvuelto.getConfirmar();
+    }
+
+    @Override
+    public void confirmarPedido() {
+        pedidoEnvuelto.confirmarPedido();
+    }
+
+    @Override
     public String getHistorial() {
         return pedidoEnvuelto.getHistorial();
     }

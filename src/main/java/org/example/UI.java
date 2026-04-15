@@ -78,7 +78,9 @@ public class UI {
         } else {
             System.out.println("\n--- LISTA DE PEDIDOS ---");
             for (IPedido p : service.listaDePedidos()) {
-                System.out.println(p);
+                System.out.println("Id: " + p.getId() +
+                        " - Precio: " + p.getImporte() +
+                        " - Estado: " + ((p.getConfirmar()) ? "Confirmado" : "Por confirmar"));
             }
         }
     }
