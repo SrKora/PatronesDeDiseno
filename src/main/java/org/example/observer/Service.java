@@ -1,5 +1,6 @@
 package org.example.observer;
 
+import org.example.AnsiColors;
 import org.example.UI;
 import org.example.decorator.*;
 
@@ -43,7 +44,7 @@ public class Service {
             if (p.getId() == id) {
                 return p;
             } else {
-                System.out.println("El id introducido no se corresponde a ningún pedido sin confirmar");
+                System.out.println(AnsiColors.RED + "Error" + AnsiColors.RESET + ": El id introducido no se corresponde a ningún pedido sin confirmar");
             }
         }
         return null;

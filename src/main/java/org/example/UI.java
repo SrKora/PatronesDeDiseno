@@ -16,32 +16,30 @@ public class UI {
 
     public int mostrarMenuDePedido() {
         System.out.println("Porfavor introduzca la acción que quiera realizar");
-        System.out.println("""
-            1. Revisar pedido
-            2. Confirmar pedido
-            3. Eliminar
-            4. Añadir cliente
-            5. Eliminar cliente
-            6. Añadir descuento
-            7. Añadir impuesto
-            8. Añadir gastos de envío
-            9. Añaidr recargo
-            10. Salir del pedido
-        """);
+        System.out.println("1. Revisar pedido\n" +
+                AnsiColors.GREEN + "2. Confirmar pedido\n" + AnsiColors.RESET +
+                AnsiColors.RED + "3. Eliminar pedido\n" + AnsiColors.RESET +
+                "4. Añadir cliente\n" +
+                AnsiColors.RED + "5. Eliminar cliente\n" + AnsiColors.RESET +
+                "6. Añadir descuento\n" +
+                "7. Añadir impuesto\n" +
+                "8. Añadir gastos de envío\n" +
+                "9. Añaidr recargo\n" +
+                "10. Salir del pedido\n");
 
         return leerEnteroRango(1, 10);
     }
 
     public int mostrarMenu() {
         System.out.println("Porfavor introduzca la acción que quiera realizar");
-        System.out.println("""
-            1. Crear pedido
-            2. Revisar pedidos
-            3. Modificar pedido
-            4. Confirmar pedido
-            5. Eliminar pedido
-            6. Salir
-        """);
+        System.out.println(
+                "1. Crear pedido\n" +
+                "2. Revisar pedidos\n" +
+                "3. Modificar pedido\n" +
+                AnsiColors.GREEN + "4. Confirmar pedido\n" + AnsiColors.RESET +
+                AnsiColors.RED + "5. Eliminar pedido\n" + AnsiColors.RESET +
+                "6. Salir"
+        );
 
         return leerEnteroRango(1, 6);
     }
@@ -49,7 +47,7 @@ public class UI {
     public static int leerEntero(String mensaje) {
         System.out.println(mensaje);
         while (!sc.hasNextInt()) {
-            System.out.println("Error: Debes introducir un número válido.");
+            System.out.println(AnsiColors.RED + "Error" + AnsiColors.RESET + ": Debes introducir un número válido.");
             sc.next();
         }
         int numero = sc.nextInt();
@@ -80,7 +78,9 @@ public class UI {
             for (IPedido p : service.listaDePedidos()) {
                 System.out.println("Id: " + p.getId() +
                         " - Precio: " + p.getImporte() +
-                        " - Estado: " + ((p.getConfirmar()) ? "Confirmado" : "Por confirmar"));
+                        " - Estado: " + ((p.getConfirmar()) ?
+                        AnsiColors.GREEN +  "Confirmado" + AnsiColors.RESET :
+                        AnsiColors.RED +  "Por confirmar" + AnsiColors.RESET));
             }
         }
     }

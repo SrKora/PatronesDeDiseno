@@ -1,5 +1,7 @@
 package org.example.decorator;
 
+import org.example.AnsiColors;
+
 public class PedidoRecargoDecorator extends Pedido{
 
     protected IPedido pedidoEnvuelto;
@@ -28,7 +30,7 @@ public class PedidoRecargoDecorator extends Pedido{
 
     @Override
     public String toString() {
-        return pedidoEnvuelto.toString() + "\nSe ha aplicado un recargo de " + recargo + " - Importe Total: " + getImporte();
+        return pedidoEnvuelto.toString() + "\nSe ha aplicado un " + AnsiColors.YELLOW + "recargo de " + recargo + AnsiColors.RESET + " - Importe Total: " + getImporte();
     }
 
     @Override

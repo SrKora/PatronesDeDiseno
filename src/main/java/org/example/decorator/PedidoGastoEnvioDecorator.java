@@ -1,5 +1,7 @@
 package org.example.decorator;
 
+import org.example.AnsiColors;
+
 public class PedidoGastoEnvioDecorator extends Pedido {
 
     protected IPedido pedidoEnvuelto;
@@ -28,7 +30,7 @@ public class PedidoGastoEnvioDecorator extends Pedido {
 
     @Override
     public String toString() {
-        return pedidoEnvuelto.toString() + "\nSe ha aplicado un gasto de " + gasto + " - Importe Total: " + getImporte();
+        return pedidoEnvuelto.toString() + "\nSe ha aplicado un " +  AnsiColors.PURPLE + "gasto de " + gasto + AnsiColors.RESET + " - Importe Total: " + getImporte();
     }
 
     @Override
