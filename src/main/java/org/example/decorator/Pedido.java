@@ -65,7 +65,7 @@ public abstract class Pedido implements IPedido {
 
     @Override
     public void desuscribir(IObserver o) {
-        if (suscriptores.toArray().length != 1){
+        if (suscriptores.toArray().length <= 1){
             suscriptores.remove(o);
         } else {
             System.out.println("No puedes dejar un pedido sin clientes");

@@ -4,7 +4,7 @@ public class PedidoBase extends Pedido{
 
     public PedidoBase(int id, float importe) {
         super(id, importe);
-        this.historial = "Pedido creado - Id: " + id + "\n El importe base es de " + importe;
+        this.historial = "Pedido - Id: " + id + "\nEstado del pedido: " + confirmado + "\n El importe base es de " + importe;
 
     }
 

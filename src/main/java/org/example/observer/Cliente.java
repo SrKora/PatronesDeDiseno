@@ -3,7 +3,7 @@ package org.example.observer;
 import org.example.decorator.IPedido;
 
 public class Cliente implements IObserver{
-    private String nombre;
+    private final String nombre;
 
     public Cliente(String nombre) {
         this.nombre = nombre;
@@ -11,10 +11,6 @@ public class Cliente implements IObserver{
 
     public String getNombre() {
         return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     @Override
